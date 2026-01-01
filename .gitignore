@@ -36,4 +36,11 @@ npm-debug.log*
 # yarn.lock
 # pnpm-lock.yaml
 
+# Playwright
 .playwright-mcp/
+playwright-report/
+test-results/
+
+# Website build artifacts
+website/dist/
+website/public/lib/
