@@ -1,6 +1,6 @@
 {
   "name": "@oxog/modalkit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Zero-dependency headless modal/dialog with stacking, focus trap, and animations",
   "author": "Ersin KOÇ",
   "license": "MIT",
