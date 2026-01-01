@@ -57,7 +57,9 @@
   "sideEffects": false,
   "scripts": {
     "dev": "tsup --watch",
-    "build": "tsup",
+    "build": "tsup --config tsup.core.config.ts && tsup --config tsup.react.config.ts",
+    "build:core": "tsup --config tsup.core.config.ts",
+    "build:react": "tsup --config tsup.react.config.ts",
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
