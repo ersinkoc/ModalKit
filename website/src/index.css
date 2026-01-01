@@ -1,0 +1,180 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply antialiased;
+  }
+
+  ::selection {
+    @apply bg-primary-500/30;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-900;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-700 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-600;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-950;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary-600 hover:bg-primary-500 text-white focus:ring-primary-500;
+  }
+
+  .btn-secondary {
+    @apply btn bg-gray-800 hover:bg-gray-700 text-gray-100 focus:ring-gray-500;
+  }
+
+  .btn-ghost {
+    @apply btn bg-transparent hover:bg-gray-800 text-gray-300 focus:ring-gray-500;
+  }
+
+  .link {
+    @apply text-primary-400 hover:text-primary-300 underline-offset-4 hover:underline;
+  }
+
+  .code-block {
+    @apply bg-gray-900 rounded-lg overflow-hidden font-mono text-sm;
+  }
+
+  .prose-custom {
+    @apply text-gray-300 leading-relaxed;
+  }
+
+  .prose-custom h1 {
+    @apply text-3xl font-bold text-white mb-4;
+  }
+
+  .prose-custom h2 {
+    @apply text-2xl font-semibold text-white mt-8 mb-4;
+  }
+
+  .prose-custom h3 {
+    @apply text-xl font-semibold text-white mt-6 mb-3;
+  }
+
+  .prose-custom p {
+    @apply mb-4;
+  }
+
+  .prose-custom code:not(pre code) {
+    @apply bg-gray-800 px-1.5 py-0.5 rounded text-primary-300 font-mono text-sm;
+  }
+
+  .prose-custom pre {
+    @apply my-4;
+  }
+
+  .prose-custom ul {
+    @apply list-disc list-inside mb-4 space-y-2;
+  }
+
+  .prose-custom ol {
+    @apply list-decimal list-inside mb-4 space-y-2;
+  }
+
+  .prose-custom a {
+    @apply text-primary-400 hover:text-primary-300;
+  }
+}
+
+/* Prism.js custom theme */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #e4e4e7;
+  background: none;
+  font-family: 'JetBrains Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 0.875rem;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.6;
+  tab-size: 2;
+  hyphens: none;
+}
+
+pre[class*="language-"] {
+  padding: 1rem;
+  margin: 0;
+  overflow: auto;
+  background: #18181b;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #71717a;
+}
+
+.token.punctuation {
+  color: #a1a1aa;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #f472b6;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #a3e635;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #67e8f9;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #c084fc;
+}
+
+.token.function,
+.token.class-name {
+  color: #60a5fa;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: #fbbf24;
+}

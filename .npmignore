@@ -1,0 +1,30 @@
+# Source files
+src/
+
+# Tests
+tests/
+coverage/
+vitest.config.ts
+
+# Documentation
+*.md
+!README.md
+website/
+SPECIFICATION.md
+IMPLEMENTATION.md
+TASKS.md
+
+# Config files
+tsconfig.json
+tsup.config.ts
+.gitignore
+.github/
+
+# IDE
+.idea/
+.vscode/
+
+# Development
+node_modules/
+*.log
+.env*
