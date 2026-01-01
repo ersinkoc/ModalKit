@@ -8,6 +8,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
+      '@oxog/modalkit/react': resolve(__dirname, 'public/lib/react/index.js'),
+      '@oxog/modalkit': resolve(__dirname, 'public/lib/index.js'),
     },
   },
   build: {

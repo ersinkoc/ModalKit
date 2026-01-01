@@ -18,8 +18,10 @@
     "noUncheckedIndexedAccess": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@oxog/modalkit": ["public/lib/index.d.ts"],
+      "@oxog/modalkit/react": ["public/lib/react/index.d.ts"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "public/lib/**/*.d.ts"]
 }

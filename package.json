@@ -57,9 +57,10 @@
   "sideEffects": false,
   "scripts": {
     "dev": "tsup --watch",
-    "build": "tsup --config tsup.core.config.ts && tsup --config tsup.react.config.ts",
+    "build": "tsup --config tsup.core.config.ts && tsup --config tsup.react.config.ts && npm run copy:website",
     "build:core": "tsup --config tsup.core.config.ts",
     "build:react": "tsup --config tsup.react.config.ts",
+    "copy:website": "node -e \"const fs=require('fs');const p=require('path');function cp(s,d){fs.mkdirSync(d,{recursive:true});fs.readdirSync(s).forEach(f=>{const src=p.join(s,f),dst=p.join(d,f);fs.statSync(src).isDirectory()?cp(src,dst):fs.copyFileSync(src,dst)})};cp('dist','website/public/lib')\"",
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
