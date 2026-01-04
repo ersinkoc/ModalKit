@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import {
   Modal,
   ModalPortal,
@@ -12,17 +12,8 @@ import { X, User, Mail, Lock, Send } from 'lucide-react'
 
 export default function FormModalDemo() {
   const [open, setOpen] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
   const [formData, setFormData] = useState({ name: '', email: '', password: '' })
   const [submitted, setSubmitted] = useState(false)
-
-  useEffect(() => {
-    if (open) {
-      requestAnimationFrame(() => setIsVisible(true))
-    } else {
-      setIsVisible(false)
-    }
-  }, [open])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -38,39 +29,22 @@ export default function FormModalDemo() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="px-6 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-medium rounded-lg transition-all flex items-center gap-2"
+        className="px-6 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-medium rounded-lg transition-all flex items-center gap-2 cursor-pointer"
       >
         <User className="w-5 h-5" />
         Sign Up Form
       </button>
 
-      <Modal open={open} onOpenChange={setOpen} animated>
+      <Modal open={open} onOpenChange={setOpen}>
         <ModalPortal>
-          <ModalOverlay
-            className="fixed inset-0 backdrop-blur-sm transition-opacity duration-200"
-            style={{
-              backgroundColor: 'rgba(0,0,0,0.6)',
-              opacity: isVisible ? 1 : 0,
-            }}
-          />
+          <ModalOverlay className="fixed inset-0 bg-black/60 backdrop-blur-sm" />
           <ModalContainer className="fixed inset-0 flex items-center justify-center p-4">
-            <ModalContent
-              className="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-md transition-all duration-200"
-              style={{
-                backgroundColor: '#111827',
-                maxWidth: '28rem',
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'scale(1) translateY(0)' : 'scale(0.95) translateY(20px)',
-              }}
-            >
+            <ModalContent className="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-md">
               <div className="flex items-center justify-between p-6 border-b border-gray-800">
-                <ModalTitle
-                  className="text-xl font-semibold text-white"
-                  style={{ color: 'white', fontSize: '1.25rem' }}
-                >
+                <ModalTitle className="text-xl font-semibold text-white">
                   Create Account
                 </ModalTitle>
-                <ModalClose className="p-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-400 hover:text-white">
+                <ModalClose className="p-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-400 hover:text-white cursor-pointer">
                   <X className="w-5 h-5" />
                 </ModalClose>
               </div>
@@ -135,7 +109,7 @@ export default function FormModalDemo() {
                         value={formData.password}
                         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                         required
-                        placeholder="••••••••"
+                        placeholder="********"
                         className="w-full pl-10 pr-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition-colors"
                       />
                     </div>
@@ -145,13 +119,13 @@ export default function FormModalDemo() {
                     <button
                       type="button"
                       onClick={() => setOpen(false)}
-                      className="flex-1 px-4 py-2.5 bg-gray-800 hover:bg-gray-700 text-white rounded-lg transition-colors"
+                      className="flex-1 px-4 py-2.5 bg-gray-800 hover:bg-gray-700 text-white rounded-lg transition-colors cursor-pointer"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
-                      className="flex-1 px-4 py-2.5 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white rounded-lg transition-all font-medium"
+                      className="flex-1 px-4 py-2.5 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white rounded-lg transition-all font-medium cursor-pointer"
                     >
                       Create Account
                     </button>

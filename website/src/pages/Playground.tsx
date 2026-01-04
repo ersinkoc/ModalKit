@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import {
   Modal,
   ModalPortal,
@@ -65,7 +65,6 @@ function MyModal() {
         <ModalPortal>
           ${config.showOverlay ? `<ModalOverlay
             className="fixed inset-0${config.overlayBlur ? ' backdrop-blur-sm' : ''}"
-            style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}
           />` : ''}
           <ModalContainer className="fixed inset-0 flex ${config.position === 'top' ? 'items-start pt-20' : config.position === 'bottom' ? 'items-end pb-20' : 'items-center'} justify-center">
             <ModalContent className="bg-white rounded-xl p-6 max-w-md">
@@ -86,15 +85,6 @@ function MyModal() {
 export default function Playground() {
   const [config, setConfig] = useState<PlaygroundConfig>(defaultConfig)
   const [open, setOpen] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    if (open) {
-      requestAnimationFrame(() => setIsVisible(true))
-    } else {
-      setIsVisible(false)
-    }
-  }, [open])
 
   const updateConfig = <K extends keyof PlaygroundConfig>(key: K, value: PlaygroundConfig[K]) => {
     setConfig(prev => ({ ...prev, [key]: value }))
@@ -106,24 +96,6 @@ export default function Playground() {
     center: 'items-center',
     top: 'items-start pt-20',
     bottom: 'items-end pb-20',
-  }
-
-  const getTransformStyle = () => {
-    if (!isVisible) {
-      switch (config.animation) {
-        case 'fade':
-          return { opacity: 0, transform: 'scale(1)' }
-        case 'scale':
-          return { opacity: 0, transform: 'scale(0.95)' }
-        case 'slide-up':
-          return { opacity: 0, transform: 'translateY(50px)' }
-        case 'slide-down':
-          return { opacity: 0, transform: 'translateY(-50px)' }
-        default:
-          return { opacity: 1, transform: 'scale(1)' }
-      }
-    }
-    return { opacity: 1, transform: 'scale(1) translateY(0)' }
   }
 
   return (
@@ -150,7 +122,7 @@ export default function Playground() {
                 </div>
                 <button
                   onClick={resetConfig}
-                  className="text-gray-400 hover:text-white text-sm flex items-center gap-1"
+                  className="text-gray-400 hover:text-white text-sm flex items-center gap-1 cursor-pointer"
                 >
                   <RotateCcw className="w-4 h-4" />
                   Reset
@@ -259,7 +231,7 @@ export default function Playground() {
             {/* Preview Button */}
             <button
               onClick={() => setOpen(true)}
-              className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-semibold rounded-xl transition-all flex items-center justify-center gap-2"
+              className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-semibold rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
               <Play className="w-5 h-5" />
               Preview Modal
@@ -291,36 +263,22 @@ export default function Playground() {
           <ModalPortal>
             {config.showOverlay && (
               <ModalOverlay
-                className={`fixed inset-0 transition-opacity duration-200 ${config.overlayBlur ? 'backdrop-blur-sm' : ''}`}
-                style={{
-                  backgroundColor: 'rgba(0,0,0,0.6)',
-                  opacity: isVisible ? 1 : 0,
-                }}
+                className={`fixed inset-0 bg-black/60${config.overlayBlur ? ' backdrop-blur-sm' : ''}`}
               />
             )}
 
             <ModalContainer className={`fixed inset-0 flex ${positionClasses[config.position]} justify-center p-4`}>
-              <ModalContent
-                className="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-md p-6 transition-all duration-200"
-                style={{
-                  backgroundColor: '#111827',
-                  maxWidth: '28rem',
-                  ...getTransformStyle(),
-                }}
-              >
+              <ModalContent className="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-md p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <ModalTitle
-                    className="text-xl font-semibold text-white"
-                    style={{ color: 'white', fontSize: '1.25rem' }}
-                  >
+                  <ModalTitle className="text-xl font-semibold text-white">
                     Preview Modal
                   </ModalTitle>
-                  <ModalClose className="p-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-400 hover:text-white">
+                  <ModalClose className="p-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-400 hover:text-white cursor-pointer">
                     <X className="w-5 h-5" />
                   </ModalClose>
                 </div>
 
-                <ModalDescription className="text-gray-400 mb-6" style={{ color: '#9ca3af' }}>
+                <ModalDescription className="text-gray-400 mb-6">
                   This is a preview of your configured modal. Try pressing
                   Escape, clicking outside, or tabbing through the focusable
                   elements to test the behavior.
@@ -334,7 +292,7 @@ export default function Playground() {
                   />
                   <button
                     onClick={() => setOpen(false)}
-                    className="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors"
+                    className="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors cursor-pointer"
                   >
                     Close
                   </button>

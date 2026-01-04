@@ -6,11 +6,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ersinkoc/modalkit.git"
+    "url": "git+https://github.com/oxog/modalkit.git"
   },
   "homepage": "https://modalkit.oxog.dev",
   "bugs": {
-    "url": "https://github.com/ersinkoc/modalkit/issues"
+    "url": "https://github.com/oxog/modalkit/issues"
   },
   "keywords": [
     "modal",

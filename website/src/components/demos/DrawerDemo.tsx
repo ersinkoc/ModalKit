@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import {
   Modal,
   ModalPortal,
@@ -12,15 +12,6 @@ import { X, Menu, Home, Settings, User, HelpCircle, LogOut } from 'lucide-react'
 
 export default function DrawerDemo() {
   const [open, setOpen] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    if (open) {
-      requestAnimationFrame(() => setIsVisible(true))
-    } else {
-      setIsVisible(false)
-    }
-  }, [open])
 
   const menuItems = [
     { icon: Home, label: 'Home', active: true },
@@ -33,41 +24,25 @@ export default function DrawerDemo() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2 border border-gray-700"
+        className="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2 border border-gray-700 cursor-pointer"
       >
         <Menu className="w-5 h-5" />
         Open Drawer
       </button>
 
-      <Modal open={open} onOpenChange={setOpen} animated>
+      <Modal open={open} onOpenChange={setOpen}>
         <ModalPortal>
-          <ModalOverlay
-            className="fixed inset-0 transition-opacity duration-200"
-            style={{
-              backgroundColor: 'rgba(0,0,0,0.6)',
-              opacity: isVisible ? 1 : 0,
-            }}
-          />
+          <ModalOverlay className="fixed inset-0 bg-black/60" />
           <ModalContainer className="fixed inset-0">
             <ModalContent
-              className="absolute left-0 top-0 bottom-0 w-80 bg-gray-900 border-r border-gray-800 shadow-2xl transition-transform duration-300"
-              style={{
-                backgroundColor: '#111827',
-                width: '20rem',
-                height: '100%',
-                maxHeight: '100vh',
-                borderRadius: 0,
-                transform: isVisible ? 'translateX(0)' : 'translateX(-100%)',
-              }}
+              className="absolute left-0 top-0 bottom-0 w-80 bg-gray-900 border-r border-gray-800 shadow-2xl"
+              style={{ borderRadius: 0 }}
             >
               <div className="flex items-center justify-between p-4 border-b border-gray-800">
-                <ModalTitle
-                  className="text-lg font-semibold text-white"
-                  style={{ color: 'white', fontSize: '1.125rem' }}
-                >
+                <ModalTitle className="text-lg font-semibold text-white">
                   Navigation
                 </ModalTitle>
-                <ModalClose className="p-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-400 hover:text-white">
+                <ModalClose className="p-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-400 hover:text-white cursor-pointer">
                   <X className="w-5 h-5" />
                 </ModalClose>
               </div>
@@ -92,7 +67,7 @@ export default function DrawerDemo() {
               </nav>
 
               <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-800">
-                <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-red-400 hover:bg-red-500/10 transition-colors">
+                <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-red-400 hover:bg-red-500/10 transition-colors cursor-pointer">
                   <LogOut className="w-5 h-5" />
                   Sign Out
                 </button>

@@ -56,7 +56,7 @@ export interface UseModalReturn {
 export function useModal(config?: ModalConfig): UseModalReturn {
   // Create modal instance once
   const modalRef = useRef<Modal | null>(null)
-  const configRef = useRef(config)
+  const configRef = useRef<string>('')
 
   if (!modalRef.current) {
     modalRef.current = createModal(config)
@@ -67,10 +67,11 @@ export function useModal(config?: ModalConfig): UseModalReturn {
     modalRef.current!.getState()
   )
 
-  // Update config when it changes
+  // Update config when it changes - use string comparison to avoid reference issues
   useEffect(() => {
-    if (configRef.current !== config && config) {
-      configRef.current = config
+    const configString = JSON.stringify(config)
+    if (configRef.current !== configString && config) {
+      configRef.current = configString
       modalRef.current?.setConfig(config)
     }
   }, [config])

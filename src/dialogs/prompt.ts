@@ -168,6 +168,7 @@ export function prompt(
     }
 
     function handleSubmit(): void {
+      if (resolved) return // Prevent double resolution
       clearError()
       const validationResult = validateInput()
 
@@ -182,7 +183,7 @@ export function prompt(
       }
 
       resolved = true
-      modal.close()
+      modal.close() // Will trigger cleanup via onClose
       resolve(input.value)
     }
 
@@ -207,8 +208,9 @@ export function prompt(
     styleButton(cancelButton, 'default')
 
     cancelButton.addEventListener('click', () => {
+      if (resolved) return // Prevent double resolution
       resolved = true
-      modal.close()
+      modal.close() // Will trigger cleanup via onClose
       resolve(null)
     })
 

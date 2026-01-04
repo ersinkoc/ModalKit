@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import {
   Modal,
   ModalPortal,
@@ -13,15 +13,6 @@ import { X, Layers } from 'lucide-react'
 
 function NestedModal({ level }: { level: number }) {
   const [open, setOpen] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    if (open) {
-      requestAnimationFrame(() => setIsVisible(true))
-    } else {
-      setIsVisible(false)
-    }
-  }, [open])
 
   const colors = [
     'from-purple-600 to-pink-600',
@@ -40,45 +31,30 @@ function NestedModal({ level }: { level: number }) {
     <>
       <button
         onClick={() => setOpen(true)}
-        className={`px-4 py-2 bg-gradient-to-r ${colors[level % colors.length]} text-white rounded-lg transition-all flex items-center gap-2`}
+        className={`px-4 py-2 bg-gradient-to-r ${colors[level % colors.length]} text-white rounded-lg transition-all flex items-center gap-2 cursor-pointer`}
       >
         <Layers className="w-4 h-4" />
         {level === 0 ? 'Open Stacked Modals' : `Open Level ${level + 1}`}
       </button>
 
-      <Modal open={open} onOpenChange={setOpen} animated>
+      <Modal open={open} onOpenChange={setOpen}>
         <ModalPortal>
-          <ModalOverlay
-            className="fixed inset-0 transition-opacity duration-200"
-            style={{
-              backgroundColor: 'rgba(0,0,0,0.4)',
-              opacity: isVisible ? 1 : 0,
-            }}
-          />
+          <ModalOverlay className="fixed inset-0 bg-black/40" />
           <ModalContainer className="fixed inset-0 flex items-center justify-center p-4">
             <ModalContent
-              className={`bg-gray-900 border ${bgColors[level % bgColors.length]} rounded-2xl shadow-2xl w-full max-w-md p-6 transition-all duration-200`}
-              style={{
-                backgroundColor: '#111827',
-                maxWidth: '28rem',
-                marginTop: level * 20,
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'scale(1) translateY(0)' : 'scale(0.95) translateY(20px)',
-              }}
+              className={`bg-gray-900 border ${bgColors[level % bgColors.length]} rounded-2xl shadow-2xl w-full max-w-md p-6`}
+              style={{ marginTop: level * 20 }}
             >
               <div className="flex items-center justify-between mb-4">
-                <ModalTitle
-                  className="text-xl font-semibold text-white"
-                  style={{ color: 'white', fontSize: '1.25rem' }}
-                >
+                <ModalTitle className="text-xl font-semibold text-white">
                   Modal Level {level + 1}
                 </ModalTitle>
-                <ModalClose className="p-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-400 hover:text-white">
+                <ModalClose className="p-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-400 hover:text-white cursor-pointer">
                   <X className="w-5 h-5" />
                 </ModalClose>
               </div>
 
-              <ModalDescription className="text-gray-400 mb-6" style={{ color: '#9ca3af' }}>
+              <ModalDescription className="text-gray-400 mb-6">
                 This is modal level {level + 1}. ModalKit handles stacking automatically,
                 managing z-index, focus, and keyboard navigation for each layer.
               </ModalDescription>
@@ -86,7 +62,7 @@ function NestedModal({ level }: { level: number }) {
               <div className="flex gap-3 justify-end">
                 <button
                   onClick={() => setOpen(false)}
-                  className="px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg transition-colors"
+                  className="px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg transition-colors cursor-pointer"
                 >
                   Close
                 </button>

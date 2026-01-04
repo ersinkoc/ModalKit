@@ -102,12 +102,18 @@ export function Modal({
     })
   }, [])
 
-  // Update config
+  // Update config - track previous config to avoid unnecessary updates
+  const prevConfigRef = useRef<string>('')
+
   useEffect(() => {
-    modalRef.current?.setConfig({
-      ...config,
-      onOpenChange,
-    })
+    const configString = JSON.stringify({ ...config, onOpenChange })
+    if (prevConfigRef.current !== configString) {
+      prevConfigRef.current = configString
+      modalRef.current?.setConfig({
+        ...config,
+        onOpenChange,
+      })
+    }
   }, [config, onOpenChange])
 
   // Cleanup

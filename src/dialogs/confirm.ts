@@ -97,8 +97,9 @@ export function confirm(
       styleButton(button, btnConfig.variant)
 
       button.addEventListener('click', () => {
+        if (resolved) return // Prevent double resolution
         resolved = true
-        modal.close()
+        modal.close() // Will trigger cleanup via onClose
         resolve(btnConfig.value)
       })
 

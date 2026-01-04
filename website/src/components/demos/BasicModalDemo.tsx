@@ -18,38 +18,26 @@ export default function BasicModalDemo() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white font-medium rounded-lg transition-colors"
+        className="px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white font-medium rounded-lg transition-colors cursor-pointer"
       >
         Open Modal
       </button>
 
       <Modal open={open} onOpenChange={setOpen}>
         <ModalPortal>
-          <ModalOverlay
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm"
-            style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}
-          />
+          <ModalOverlay className="fixed inset-0 bg-black/60 backdrop-blur-sm" />
           <ModalContainer className="fixed inset-0 flex items-center justify-center p-4">
-            <ModalContent
-              className="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-md p-6"
-              style={{ backgroundColor: '#111827', maxWidth: '28rem' }}
-            >
+            <ModalContent className="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-md p-6">
               <div className="flex items-center justify-between mb-4">
-                <ModalTitle
-                  className="text-xl font-semibold text-white"
-                  style={{ color: 'white', fontSize: '1.25rem' }}
-                >
+                <ModalTitle className="text-xl font-semibold text-white">
                   Welcome to ModalKit
                 </ModalTitle>
-                <ModalClose className="p-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-400 hover:text-white">
+                <ModalClose className="p-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-400 hover:text-white cursor-pointer">
                   <X className="w-5 h-5" />
                 </ModalClose>
               </div>
 
-              <ModalDescription
-                className="text-gray-400 mb-6"
-                style={{ color: '#9ca3af' }}
-              >
+              <ModalDescription className="text-gray-400 mb-6">
                 This is a fully accessible modal built with ModalKit. It includes
                 focus trapping, keyboard navigation, and proper ARIA attributes.
               </ModalDescription>
@@ -57,13 +45,13 @@ export default function BasicModalDemo() {
               <div className="flex gap-3 justify-end">
                 <button
                   onClick={() => setOpen(false)}
-                  className="px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg transition-colors"
+                  className="px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={() => setOpen(false)}
-                  className="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors"
+                  className="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors cursor-pointer"
                 >
                   Got it!
                 </button>

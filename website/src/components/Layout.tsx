@@ -76,7 +76,7 @@ export default function Layout() {
 
             <div className="flex items-center gap-4">
               <a
-                href="https://github.com/ersinkoc/modalkit"
+                href="https://github.com/oxog/modalkit"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors"
@@ -159,7 +159,7 @@ export default function Layout() {
           <p>MIT License © {new Date().getFullYear()} Ersin KOÇ</p>
           <p className="mt-2">
             <a
-              href="https://github.com/ersinkoc/modalkit"
+              href="https://github.com/oxog/modalkit"
               className="text-primary-400 hover:text-primary-300"
             >
               GitHub

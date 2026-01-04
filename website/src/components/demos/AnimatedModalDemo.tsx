@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import {
   Modal,
   ModalPortal,
@@ -13,21 +13,12 @@ import { X, Sparkles } from 'lucide-react'
 
 export default function AnimatedModalDemo() {
   const [open, setOpen] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    if (open) {
-      requestAnimationFrame(() => setIsVisible(true))
-    } else {
-      setIsVisible(false)
-    }
-  }, [open])
 
   return (
     <>
       <button
         onClick={() => setOpen(true)}
-        className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-medium rounded-lg transition-all flex items-center gap-2"
+        className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-medium rounded-lg transition-all flex items-center gap-2 cursor-pointer"
       >
         <Sparkles className="w-5 h-5" />
         Animated Modal
@@ -35,44 +26,26 @@ export default function AnimatedModalDemo() {
 
       <Modal open={open} onOpenChange={setOpen} animated>
         <ModalPortal>
-          <ModalOverlay
-            className="fixed inset-0 backdrop-blur-sm transition-opacity duration-300"
-            style={{
-              backgroundColor: 'rgba(0,0,0,0.6)',
-              opacity: isVisible ? 1 : 0,
-            }}
-          />
+          <ModalOverlay className="fixed inset-0 bg-black/60 backdrop-blur-sm" />
           <ModalContainer className="fixed inset-0 flex items-center justify-center p-4">
-            <ModalContent
-              className="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-md p-6 transition-all duration-300"
-              style={{
-                backgroundColor: '#111827',
-                maxWidth: '28rem',
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'scale(1) translateY(0)' : 'scale(0.95) translateY(20px)',
-              }}
-            >
+            <ModalContent className="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-md p-6">
               <div className="flex items-center justify-between mb-4">
-                <ModalTitle
-                  className="text-xl font-semibold text-white"
-                  style={{ color: 'white', fontSize: '1.25rem' }}
-                >
+                <ModalTitle className="text-xl font-semibold text-white">
                   Smooth Animations
                 </ModalTitle>
-                <ModalClose className="p-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-400 hover:text-white">
+                <ModalClose className="p-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-400 hover:text-white cursor-pointer">
                   <X className="w-5 h-5" />
                 </ModalClose>
               </div>
 
-              <ModalDescription className="text-gray-400 mb-6" style={{ color: '#9ca3af' }}>
-                This modal uses CSS transitions for smooth animations.
-                The overlay fades while the content scales and slides.
+              <ModalDescription className="text-gray-400 mb-6">
+                This modal uses smooth CSS transitions for animations.
               </ModalDescription>
 
               <div className="flex gap-3 justify-end">
                 <button
                   onClick={() => setOpen(false)}
-                  className="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-lg transition-all"
+                  className="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-lg transition-all cursor-pointer"
                 >
                   Beautiful!
                 </button>

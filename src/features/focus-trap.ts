@@ -30,6 +30,7 @@ export function createFocusTrap(config: FocusTrapConfig): FocusTrap {
 
   let active = false
   let paused = false
+  let focusing = false // Guard against re-entrancy in handleFocusIn
 
   // Resolve element from ref
   function resolveElement(
@@ -103,11 +104,12 @@ export function createFocusTrap(config: FocusTrapConfig): FocusTrap {
 
   // Handle focus leaving the container
   function handleFocusIn(event: FocusEvent): void {
-    if (!active || paused) return
+    if (!active || paused || focusing) return
 
     const target = event.target as Node
     if (!container.contains(target)) {
       // Focus has left the trap, bring it back
+      focusing = true
       event.preventDefault()
       const firstFocusable = getFirstFocusable(container)
       if (firstFocusable) {
@@ -116,6 +118,8 @@ export function createFocusTrap(config: FocusTrapConfig): FocusTrap {
         // Fallback to container itself
         container.focus()
       }
+      // Use setTimeout to reset the guard after focus event completes
+      setTimeout(() => { focusing = false }, 0)
     }
   }
 
